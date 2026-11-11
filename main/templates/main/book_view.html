@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Книга
+{% endblock %}
+
+{% block content %}
+<h1>Усі книжки нашої бібліотеки:</h1>
+    {% if book %}
+        <div class="alert alert-secondary mt-1">
+            <h3><u>{{ book.title }}</u></h3>
+            <p><b><i>{{ book.author }}</i></b></p>
+            <p><i>{{ book.text }}</i></p>
+            <p><b>Видано:</b> {{ book.published }}</p>
+            <p>Кількість книжок: {{ book.count }}</p>
+            <p><b>Зареєстровано: {{ book.created }}</b></p>
+        </div>
+
+    {% else %}
+        <p>Вибачаємось, але така книжка, нажаль, відсутня в нашому каталозі...</p>
+    {% endif %}
+{% endblock %}

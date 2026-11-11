@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<h2>Усі книжки нашої бібліотеки:</h2>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Назва</th>
+        <th scope="col">Автор</th>
+        <th scope="col">Опис</th>
+        <th scope="col">Кількість</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% if books %}
+            {% for el in books %}
+            <tr>
+                <th scope="row">{{ el.id }}</th>
+                <td>{{ el.title|truncatechars:20 }}</td>
+                <td>{{ el.author|upper }}</td>
+                <td>{{ el.text|truncatewords:10 }}</td>
+                <td>{{ el.count }}</td>
+                <td>
+                    <a type="button" class="btn btn-white btn-sm" href="/book/{{ el.id }}/view">
+                        <img src="data:image/png;base64,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" width="24" height="24">
+                    </a></td>
+                <td>
+                    <a type="button" class="btn btn-white btn-sm" href="/book/{{ el.id }}/edit">
+                        <img src="data:image/png;base64,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" width="24" height="24">
+                    </a></td>
+                <td>
+                    <a type="button" class="btn btn-white btn-sm" href="/book/{{ el.id }}/delete">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKvtqFZmS74tqMk5fdXCJWx3qHeyMq1-G94CWUkpNsw&s=10" width="24" height="24">
+                    </a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>Вибачаємось, але така книжка, нажаль, відсутня в нашому каталозі...</p>
+    {% endif %}
+    </tbody>
+</table>
+{% endblock %}
